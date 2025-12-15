@@ -1,0 +1,69 @@
+<?php
+require_once 'config.php';
+$page_title = "Register form";
+require_once 'header.php';
+
+
+if($_SERVER['REQUEST_METHOD']== 'POST'){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+
+    $sql = "INSERT INTO users(username, password,email, phone) 
+    VALUES ('$username','$password','$email','$phone')";
+
+    $check = mysqli_query($conn,$sql);
+
+        // $stmt = mysqli_prepare($conn, $sql);
+        // mysqli_stmt_bind_param($stmt, "sss", $title, $description, $level);
+        // mysqli_stmt_execute($stmt)
+
+    if($check){
+        echo "user added successefully";
+    }
+    header('location:login.php');
+}
+
+
+?>
+<div class="container">
+    <div class="form-container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Register Form</h2>
+            </div>
+            
+            <form method="POST" action="">
+                <div class="form-group">
+                    <label for="title">Username</label>
+                    <input type="text" class="form-control" id="title" name="username" 
+                           required maxlength="50" placeholder="Entrez votre Username">
+                </div>
+                <div class="form-group">
+                    <label for="description">Password</label>
+                    <input type="password" class="form-control" id="title" name="password" 
+                           required maxlength="50" placeholder="Entrer votre Password">
+                </div>
+                <div class="form-group">
+                    <label for="description">Email</label>
+                    <input type="email" class="form-control" id="title" name="email" 
+                           required maxlength="50" placeholder="Entrer votre Email">
+                </div>
+                <div class="form-group">
+                    <label for="description">Phone Number</label>
+                    <input type="text" class="form-control" id="title" name="phone" 
+                           required maxlength="50" placeholder="Entrer votre numero de Tel">
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-top: 30px;">
+                    <button type="submit" class="btn btn-success">💾 Register Now</button>
+                    <a href="courses_list.php" class="btn btn-secondary">Annuler</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php require_once 'footer.php'; ?>
+

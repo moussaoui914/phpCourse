@@ -7,7 +7,8 @@ create table Course(
 	title varchar(50),
 	description text,
 	level varchar(50)CHECK (level IN ('Delivered', 'Cancelled', 'Under Process')),
-	created_at DATETIME
+	created_at DATETIME,
+	image varchar(50);
 )
 
 ---------------------------------------
