@@ -1,6 +1,5 @@
 <?php
 require_once 'config.php';
-$page_title = "Register form";
 require_once 'header.php';
 
 
@@ -8,19 +7,21 @@ if($_SERVER['REQUEST_METHOD']== 'POST'){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "INSERT INTO users(username, password) 
-    VALUES ('$username','$password')";
+    $sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+    $requete = mysqli_prepare($conn,$sql);
+    mysqli_stmt_bind_param($requete,"ss",$username,$password);
+    mysqli_stmt_execute($requete);
+    $result= mysqli_stmt_get_result($requete);
 
-    $check = mysqli_query($conn,$sql);
 
-        // $stmt = mysqli_prepare($conn, $sql);
-        // mysqli_stmt_bind_param($stmt, "sss", $title, $description, $level);
-        // mysqli_stmt_execute($stmt)
-
-    if($check){
+    if(mysqli_num_rows($result)== 1){
         $_SESSION['username'] = $username;
+        $_SESSION['pasword'] = $password;
+        header("location:index.php");
+    }else{
+        echo "user not found";
     }
-    header('location:index.php');
+
 }
 
 
@@ -45,7 +46,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST'){
                 </div>
                 
                 <div style="display: flex; gap: 10px; margin-top: 30px;">
-                    <button type="submit" class="btn btn-success">💾 Register Now</button>
+                    <button type="submit" class="btn btn-success">Login</button>
                     <a href="courses_list.php" class="btn btn-secondary">Annuler</a>
                 </div>
             </form>

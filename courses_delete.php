@@ -1,6 +1,5 @@
 <?php
 require_once 'config.php';
-$page_title = "Supprimer un Cours";
 require_once 'header.php';
 
 if (!isset($_GET['id'])) {

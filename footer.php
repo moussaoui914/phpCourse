@@ -1,5 +1,3 @@
-    </main>
-    
     <footer class="footer">
         <div class="footer-container">
             <p>© <?php echo date('Y'); ?> - Gestion des Cours. Tous droits réservés.</p>

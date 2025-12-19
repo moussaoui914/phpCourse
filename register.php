@@ -1,6 +1,5 @@
 <?php
 require_once 'config.php';
-$page_title = "Register form";
 require_once 'header.php';
 
 
@@ -15,9 +14,6 @@ if($_SERVER['REQUEST_METHOD']== 'POST'){
 
     $check = mysqli_query($conn,$sql);
 
-        // $stmt = mysqli_prepare($conn, $sql);
-        // mysqli_stmt_bind_param($stmt, "sss", $title, $description, $level);
-        // mysqli_stmt_execute($stmt)
 
     if($check){
         echo "user added successefully";
@@ -59,6 +55,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST'){
                 <div style="display: flex; gap: 10px; margin-top: 30px;">
                     <button type="submit" class="btn btn-success">💾 Register Now</button>
                     <a href="courses_list.php" class="btn btn-secondary">Annuler</a>
+                    <a href="login.php" class="btn btn-secondary">Already have account</a>
                 </div>
             </form>
         </div>

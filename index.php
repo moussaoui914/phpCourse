@@ -1,8 +1,10 @@
 <?php
 require_once 'config.php';
-$page_title = "Accueil - Gestion des Cours";
 require_once 'header.php';
 
+if(isset($_SESSION['username'])){
+$username = $_SESSION['username'];
+}
 $courses_count = 0;
 $sections_count = 0;
 
@@ -24,7 +26,9 @@ $sections_count = 0;
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2>🏠 Bienvenue dans le système de gestion des cours</h2>
+            <h2>🏠 Bienvenue dans le système de gestion des cours <?php if (isset($_SESSION['username'])){
+                echo "Mr " .$_SESSION['username'];
+            }?></h2>
         </div>
         
         <div style="text-align: center; padding: 40px 20px;">
@@ -52,24 +56,7 @@ $sections_count = 0;
                 </a>
             </div>
             
-            <div style="margin-top: 40px; padding: 20px; background: var(--light-color); border-radius: 8px;">
-                <h4 style="margin-bottom: 15px;">📊 Statistiques rapides</h4>
-                <div style='display: flex; justify-content: center; gap: 40px; margin-top: 20px;'>
-                    <div style='text-align: center;'>
-                        <div style='font-size: 32px; font-weight: bold; color: var(--primary-color);'>
-                            <?php echo $courses_count; ?>
-                        </div>
-                        <div>Cours</div>
-                    </div>
-                    
-                    <div style='text-align: center;'>
-                        <div style='font-size: 32px; font-weight: bold; color: #28a745;'>
-                            <?php echo $sections_count; ?>
-                        </div>
-                        <div>Sections</div>
-                    </div>
-                </div>
-            </div>
+            <?php include("stats_dashboard.php") ?>
         </div>
     </div>
 </div>

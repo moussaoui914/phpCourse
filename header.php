@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($page_title) ? $page_title : 'Gestion des Cours'; ?></title>
+    <title>Gestion des Cours</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
@@ -16,6 +17,11 @@
                 <li><a href="courses_list.php">📋 Cours</a></li>
                 <li><a href="sections_list.php">📑 Sections</a></li>
                 <li><a href="register.php">Register</a></li>
+                <?php
+                    if(isset($_SESSION['username'])){ ?>
+                        <li><a href="logout.php">Logout</a></li>
+                        <li><a href="my_courses.php">My Courses</a></li>
+                    <?php } ?>
             </ul>
         </div>
     </nav>

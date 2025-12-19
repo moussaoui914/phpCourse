@@ -10,11 +10,14 @@ if (!isset($_GET['course_id'])) {
 }
 
 $course_id = $_GET['course_id']; 
-
 $query_course = "SELECT * FROM course WHERE id = ?";
+
 $stmt_course = mysqli_prepare($conn, $query_course);
+
 mysqli_stmt_bind_param($stmt_course, "i", $course_id);
+
 mysqli_stmt_execute($stmt_course);
+
 $result_course = mysqli_stmt_get_result($stmt_course);
 
 if (mysqli_num_rows($result_course) == 0) {
@@ -47,7 +50,7 @@ $result_sections = mysqli_stmt_get_result($stmt_sections);
     </div>
     <div class="card-body">
         <p><strong>Description :</strong></p>
-        <p><?php echo nl2br(htmlspecialchars($course['description'])); ?></p>
+        <p><?php echo htmlspecialchars($course['description']); ?></p>
         
         <div class="row mt-3">
             <div class="col-md-6">

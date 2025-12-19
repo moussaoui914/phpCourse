@@ -3,7 +3,8 @@ require_once 'config.php';
 require_once 'header.php';
 
 
-$query = "SELECT * FROM Course ORDER BY created_at DESC";
+$query = "SELECT DISTINCT course.* FROM course 
+INNER JOIN enrollments ON course.id = enrollments.course_id; where ";
 $result = mysqli_query($conn, $query);
 ?>
 
@@ -32,15 +33,6 @@ $result = mysqli_query($conn, $query);
             <tbody>
                 <?php if(mysqli_num_rows($result) > 0): ?>
                     <?php while($course = mysqli_fetch_assoc($result)): ?>
-                        <?php
-
-
-                        $section_query = "SELECT COUNT(*) as count FROM sections WHERE course_id = " . $course['id'];
-
-                        $section_result = mysqli_query($conn, $section_query);
-                        $section_count = mysqli_fetch_assoc($section_result);
-                        
-                        ?>
                         <tr>
                             <td><?php echo $course['id'];?></td>
                             <td>
@@ -75,26 +67,11 @@ $result = mysqli_query($conn, $query);
                                 ?>
                             </td>
                             <td>
-                                <span class="section-count">
-                                    <i class="fas fa-list"></i> <?php echo $section_count['count']; ?>
-                                </span>
-                            </td>
-                            <td>
                                 <div class="actions">
 
                                     <a href="sections_by_course.php?course_id=<?php echo $course['id']; ?>" 
                                        class="btn btn-sm btn-primary" title="Voir les sections">
                                         <i class="fas fa-eye"></i> Voir
-                                    </a>
-
-                                    <a href="courses_edit.php?id=<?php echo $course['id']; ?>" 
-                                       class="btn btn-sm btn-warning" title="Modifier">
-                                        <i class="fas fa-edit"></i> Modif
-                                    </a>
-
-                                    <a href="courses_delete.php?id=<?php echo $course['id']; ?>" 
-                                       class="btn btn-sm btn-danger btn-delete" title="Supprimer">
-                                        <i class="fas fa-trash"></i> Supp
                                     </a>
                                     <?php if (isset($_SESSION['username'])){ ?>
                                         <a href="enroll.php?id=<?php echo $course['id']; ?>" 

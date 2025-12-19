@@ -1,6 +1,5 @@
 <?php
 require_once 'config.php';
-$page_title = "Créer un Cours";
 require_once 'header.php';
 
 
@@ -18,6 +17,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST'){
         // $stmt = mysqli_prepare($conn, $sql);
         // mysqli_stmt_bind_param($stmt, "sss", $title, $description, $level);
         // mysqli_stmt_execute($stmt)
+
 
     if($result){
         echo "cours ajouter avec succes";
